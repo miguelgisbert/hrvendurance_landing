@@ -1,12 +1,12 @@
 const translations = {
     en: {
-      greeting: 'Hello, world!'
+      greeting: 'Building...'
     },
     es: {
-      greeting: '¡Hola, mundo!'
+      greeting: 'En construcción...'
     },
     ca: {
-      greeting: 'HOla, món!'
+      greeting: 'En construcció...'
     }
 };
 
