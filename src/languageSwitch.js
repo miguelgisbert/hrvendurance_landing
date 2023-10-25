@@ -2,8 +2,9 @@ import { styled } from '@mui/material/styles';
 import { Switch } from '@mui/material';
 
 
-export const LanguageSwitch = styled(Switch)(({ theme }) => ({
+export const LanguageSwitch = styled(Switch)(({ theme, language }) => ({
     padding: 8,
+    color: theme.palette.primary.main,
     '& .MuiSwitch-track': {
       borderRadius: 22 / 2,
       '&:before, &:after': {
@@ -15,17 +16,19 @@ export const LanguageSwitch = styled(Switch)(({ theme }) => ({
         height: 16,
       },
       '&:before': {
-        content: '"ES"',
+        content: language === "ca" ? '"CA"' : language === "es" ? '"ES"': '"EN"',
         fontSize: '12px',
         lineHeight: '15px',
         position: "absolute",
         left: 12,
+        color: theme.palette.secondary.main,
       },
       '&:after': {
-        content: '"ES"',
+        content: language === "ca" ? '"CA"' : language === "es" ? '"ES"': '"EN"',
         fontSize: '12px',
         lineHeight: '15px',
         right: 12,
+        color: theme.palette.secondary.main,
       },
     },
     '& .MuiSwitch-thumb': {
@@ -33,5 +36,6 @@ export const LanguageSwitch = styled(Switch)(({ theme }) => ({
       width: 16,
       height: 16,
       margin: 2,
+      backgroundColor: theme.palette.secondary.main,
     },
   }));

@@ -13,7 +13,8 @@ function createMyTheme(language) {
     const theme = createTheme(
       {
         palette: {
-          primary: { main: '#1976d2' },
+          primary: { main: '#fefce6' },
+          secondary: { main: '#18a7ad' },
         },
         typography: {
           fontFamily: 'Roboto, sans-serif',
