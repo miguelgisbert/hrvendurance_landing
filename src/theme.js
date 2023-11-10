@@ -9,12 +9,13 @@ function createMyTheme(language) {
         ca: caES,
     };
     const currentLocale = locales[language];
-    const currentTranslations = translations[language];
+    console.log("translations", translations)
     const theme = createTheme(
       {
         palette: {
           primary: { main: '#fefce6' },
           secondary: { main: '#18a7ad' },
+          background: {main: '#33332d', alternative: "#e1e1e1"}
         },
         typography: {
           fontFamily: 'Roboto, sans-serif',
@@ -31,11 +32,10 @@ function createMyTheme(language) {
             },
           },
         },
-        translations: currentTranslations, 
       },
       currentLocale
     );
-    return theme;
+    return {theme, translations: translations[language]};
   }
   
   export default createMyTheme;
