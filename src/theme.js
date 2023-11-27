@@ -15,7 +15,12 @@ function createMyTheme(language) {
         palette: {
           primary: { main: '#fefce6' },
           secondary: { main: '#18a7ad' },
-          background: {main: '#33332d', alternative: "#e1e1e1"}
+          background: {
+            main: '#33332d', 
+            alternative: "#e1e1e1",
+            cardBackground: '#3E3E38', 
+            cardBackgroundAlternative: "#e1e1e1"
+          }
         },
         typography: {
           fontFamily: 'Roboto, sans-serif',
