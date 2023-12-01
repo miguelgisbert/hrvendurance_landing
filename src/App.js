@@ -1,22 +1,33 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
-import { Grid, Typography, Card } from '@mui/material'
+import { Grid, Typography, Card, Switch } from '@mui/material'
 import createMyTheme from './theme.js'
 import Header from './components/Header'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 function App() {
   const browserLang = navigator.language || navigator.userLanguage
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  
   const [language, setLanguage] = useState(browserLang ? browserLang : 'en')
-  const {theme: currentTheme, translations} = createMyTheme(language)
-  console.log(currentTheme)
+  const [themeMode, setThemeMode] = useState(prefersDarkMode ? 'dark' : 'light')
+
+  const {theme: currentTheme, translations} = useMemo(() => {
+    return createMyTheme(language, themeMode)
+  }, [language, themeMode])
+
+  const toggleThemeMode = () => {
+    setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'))
+  }
   
   return (
     <ThemeProvider theme={currentTheme}>
         <Grid container sx={{ backgroundColor: theme => theme.palette.background.main }}>
-          <Header setLanguage={setLanguage} theme={currentTheme} translations={translations} language={language} />
+          <Header setLanguage={setLanguage} theme={currentTheme} translations={translations} language={language} themeMode={themeMode} toggleThemeMode={toggleThemeMode} />
           <Grid container height="100vh" alignItems="center" justifyContent="center" padding="30px" spacing="30px">
+          
             <Grid container item xs={12} md={6} alignItems="center" justifyContent="center">
-
+              
             </Grid>
             <Grid container item xs={12} md={6} alignItems="center" justifyContent="center" sx={{ color: theme => theme.palette.primary.main, height:"100%" }}>
               <Card item sx={{ maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
@@ -26,18 +37,24 @@ function App() {
             </Grid>
           </Grid>
 
-          <Grid container alignItems="top" justifyContent="center" padding="30px" spacing="30px"  sx={{ color: theme => theme.palette.primary.main }}>
+          <Grid container alignItems="top" justifyContent="center" padding="30px" spacing="30px" marginBottom="700px"  sx={{ color: theme => theme.palette.primary.main }}>
             <Grid item xs={4} maxWidth="350px!important">
-              <Typography>Mide</Typography>
-              <Typography>Mide tu Variabilidad de Frecuencia Cardíaca usando la cámara de tu móvil con máxima precisión comprobada. Evita problemas de compatibilidad con pulsómetros y gastos extra.</Typography>
+              <Card item sx={{ maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+                <Typography>Mide</Typography>
+                <Typography>Mide tu Variabilidad de Frecuencia Cardíaca usando la cámara de tu móvil con máxima precisión comprobada. Evita problemas de compatibilidad con pulsómetros y gastos extra.</Typography>
+              </Card>
             </Grid>
             <Grid item xs={4} maxWidth="350px!important">
-              <Typography>Entrena</Typography>
-              <Typography>Recibe diariamente una planificación de tu sesión de entrenamiento de resistencia en función de tu VFC respetando así tus días más flojos y aprovechando los más fuertes.</Typography>
+              <Card item sx={{ maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+                <Typography>Entrena</Typography>
+                <Typography>Recibe diariamente una planificación de tu sesión de entrenamiento de resistencia en función de tu VFC respetando así tus días más flojos y aprovechando los más fuertes.</Typography>
+              </Card>
             </Grid>
             <Grid item xs={4} maxWidth="350px!important">
-              <Typography>Mejora</Typography>
-              <Typography>Aprovecha la metodología de entrenamiento basado en VFC que ha demostrado obtener mayores mejoras que la planificación predefinida estándar en numerosos ensayos científicos.</Typography>
+              <Card item sx={{ maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+                <Typography>Mejora</Typography>
+                <Typography>Aprovecha la metodología de entrenamiento basado en VFC que ha demostrado obtener mayores mejoras que la planificación predefinida estándar en numerosos ensayos científicos.</Typography>
+              </Card>
             </Grid>
           </Grid>
           
