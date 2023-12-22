@@ -37,23 +37,23 @@ function App() {
             </Grid>
           </Grid>
 
-          <Grid container alignItems="top" justifyContent="center" padding="30px" spacing="30px" marginBottom="700px"  sx={{ color: theme => theme.palette.primary.main }}>
+          <Grid container alignItems="center" justifyContent="center" padding="30px" spacing="30px" marginBottom="700px"  sx={{ color: theme => theme.palette.primary.main, display: "grid", gridAutoRows: 'min-content', gridTemplateColumns: 'repeat(3, 1fr)', justifyItems: 'center', gridGap: '10px'  }}>
             <Grid item xs={4} maxWidth="350px!important">
               <Card item sx={{ maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
-                <Typography>Mide</Typography>
-                <Typography>Mide tu Variabilidad de Frecuencia Cardíaca usando la cámara de tu móvil con máxima precisión comprobada. Evita problemas de compatibilidad con pulsómetros y gastos extra.</Typography>
+                <Typography>{translations.Measure}</Typography>
+                <Typography>{translations.MeasureParagraph}</Typography>
               </Card>
             </Grid>
             <Grid item xs={4} maxWidth="350px!important">
               <Card item sx={{ maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
-                <Typography>Entrena</Typography>
-                <Typography>Recibe diariamente una planificación de tu sesión de entrenamiento de resistencia en función de tu VFC respetando así tus días más flojos y aprovechando los más fuertes.</Typography>
+                <Typography>{translations.Train}</Typography>
+                <Typography>{translations.TrainParagraph}</Typography>
               </Card>
             </Grid>
             <Grid item xs={4} maxWidth="350px!important">
               <Card item sx={{ maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
-                <Typography>Mejora</Typography>
-                <Typography>Aprovecha la metodología de entrenamiento basado en VFC que ha demostrado obtener mayores mejoras que la planificación predefinida estándar en numerosos ensayos científicos.</Typography>
+                <Typography>{translations.Improve}</Typography>
+                <Typography>{translations.ImproveParagraph}</Typography>
               </Card>
             </Grid>
           </Grid>
