@@ -56,7 +56,7 @@ function Header ({setLanguage, theme, translations, language, themeMode, toggleT
       }, [])
 
     return (
-        <Grid container height="150px" padding="30px 50px" position="fixed" sx={{ background: theme => theme.palette.background.header }}>
+        <Grid container component="header" zIndex="1000" height="150px" padding="30px 50px" position="fixed" sx={{ background: theme => theme.palette.background.header }}>
             <Grid container item xs={12} md={4} alignItems="center" justifyContent="start">
                 <Box component="img" src={logoPart1} ref={group1Ref} sx={{ width:"235px", position:"fixed", zIndex:"10", top:"50%", left:"20%", transform: "translate(0, calc(-100% - 14px))" }} />
                 <Box component="img" src={logoPart2} ref={group2Ref} sx={{ width:"235px", position:"fixed", zIndex:"10", top:"50%", left:"20%" }} />

@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles"
 import { caES, esES, enUS } from "@mui/material/locale"
 import translations from "./translations.js"
+import './index.css'
 
 function createMyTheme(language, mode) {
     const locales = {
@@ -9,21 +10,27 @@ function createMyTheme(language, mode) {
         ca: caES,
     }
     const currentLocale = locales[language]
-    console.log("translations", translations)
+
+    const primaryColor = "#fefce6";
+    const secondaryColor = "#18a7ad";
+    const backgroundColor = mode === "dark" ? "#33332d" : "#e1e1e1";
+    const headerColor = mode === "dark" ? "#33332d" : "linear-gradient(to right, #18a7ad, #33332d)";
+    const cardBackgroundColor = mode === "dark" ? "#3E3E38" : "#18a7ad";
+
     const theme = createTheme(
       {
         palette: {
           mode: mode,
-          primary: { main: "#fefce6" },
-          secondary: { main: "#18a7ad" },
+          primary: { main: primaryColor },
+          secondary: { main: secondaryColor },
           background: {
-            main: mode === "dark" ? "#33332d" : "#e1e1e1", 
-            header: mode === "dark" ? "#33332d" : "linear-gradient(to right, #18a7ad, #33332d)",
-            cardBackground: mode === "dark" ? "#3E3E38" : "#18a7ad", 
+            main: backgroundColor, 
+            header: headerColor,
+            cardBackground: cardBackgroundColor, 
           }
         },
         typography: {
-          fontFamily: "Roboto, sans-serif",
+          fontFamily: "'Montserrat', sans-serif",
         },
         components: {
           MuiTypography: {
@@ -33,6 +40,13 @@ function createMyTheme(language, mode) {
             styleOverrides: {
               root: {
                 marginBottom: "1rem",
+              },
+            },
+          },
+          MuiCard: {
+            styleOverrides: {
+              root: {
+                color: primaryColor,
               },
             },
           },
