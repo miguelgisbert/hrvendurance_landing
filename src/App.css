@@ -1,8 +1,10 @@
-.App {
-  background-color:
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-.App-logo {
+/* .App {
+  background-color:
+} */
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -33,4 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
