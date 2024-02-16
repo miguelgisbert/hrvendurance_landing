@@ -20,7 +20,7 @@ function App() {
   const browserLang = navigator.language || navigator.userLanguage
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
   
-  const [language, setLanguage] = useState(browserLang ? browserLang : 'en')
+  const [language, setLanguage]   = useState(browserLang ? browserLang : 'en')
   const [themeMode, setThemeMode] = useState(prefersDarkMode ? 'dark' : 'light')
   const [isFlipped, setIsFlipped] = useState(false)
 
@@ -28,6 +28,8 @@ function App() {
   const {theme: currentTheme, translations} = useMemo(() => {
     return createMyTheme(language, themeMode)
   }, [language, themeMode])
+
+  const shadowColor = currentTheme.palette.background.cardShadow;
   
   const toggleThemeMode = () => {
     setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'))
@@ -39,9 +41,9 @@ function App() {
   const words = [translations.Measure, translations.Train, translations.Improve];
   const [index, setIndex] = useState(0);
   const transitions = useTransition([words[index]], {
-    from: { transform: 'translate3d(0,40px,0)', opacity: 0 },
-    enter: { transform: 'translate3d(0,0px,0)', opacity: 1 },
-    leave: { transform: 'translate3d(0,-40px,0)', opacity: 0 },
+    from:   { transform: 'translate3d(0,40px,0)',   opacity: 0 },
+    enter:  { transform: 'translate3d(0,0px,0)',    opacity: 1 },
+    leave:  { transform: 'translate3d(0,-40px,0)',  opacity: 0 },
     keys: item => item,
   });
   useEffect(() => {
@@ -55,9 +57,9 @@ function App() {
   const images = [heart1, runners, improve];
   const [imageIndex, setImageIndex] = useState(0);
   const imageTransitions = useTransition([images[imageIndex]], {
-    from: { transform: 'translate3d(0,40px,0)', opacity: 0 },
-    enter: { transform: 'translate3d(0,0px,0)', opacity: 1 },
-    leave: { transform: 'translate3d(0,-40px,0)', opacity: 0 },
+    from:   { transform: 'translate3d(0,40px,0)',   opacity: 0 },
+    enter:  { transform: 'translate3d(0,0px,0)',    opacity: 1 },
+    leave:  { transform: 'translate3d(0,-40px,0)',  opacity: 0 },
     keys: item => item,
   });
   useEffect(() => {
@@ -151,66 +153,20 @@ function App() {
         return { color: 'default', Icon: SelfImprovementIcon };
     }
   };
-
-  /* const [displayedRows, setDisplayedRows] = useState([]);
-  const [visibleColumns, setVisibleColumns] = useState({});
-  const [ref, inView] = useInView({
-    triggerOnce: true, 
-  }); */
-  /* useEffect(() => {
-    if (inView) {
-      const timer = setInterval(() => {
-        if (rows.length > displayedRows.length) {
-          setDisplayedRows(prevRows => {
-            const newRows = rows.slice(0, prevRows.length + 1);
-            const newRowIndex = prevRows.length + 1
-            setVisibleColumns(prevState => {
-              const newState = { ...prevState, [newRowIndex]: ['Day', 'hr', 'RMSSD'] };
-              setTimeout(() => setVisibleColumns(prevState => ({
-                ...prevState,
-                [newRowIndex]: ['Day', 'hr', 'RMSSD', 'MRMSSD']
-              })), 200);
-              setTimeout(() => setVisibleColumns(prevState => ({
-                ...prevState,
-                [newRowIndex]: ['Day', 'hr', 'RMSSD', 'MRMSSD', 'lnRMSSD']
-              })), 400);
-              setTimeout(() => setVisibleColumns(prevState => ({
-                ...prevState,
-                [newRowIndex]: ['Day', 'hr', 'RMSSD', 'MRMSSD', 'lnRMSSD', 'MlnRMSSD']
-              })), 600);
-              setTimeout(() => setVisibleColumns(prevState => ({
-                ...prevState,
-                [newRowIndex]: ['Day', 'hr', 'RMSSD', 'MRMSSD', 'lnRMSSD', 'MlnRMSSD', 'Suggestion']
-              })), 800);
-              return newState;
-            });
-            return newRows;
-          });
-        }
-        console.log(visibleColumns)
-      }, 1000);
-  
-      return () => clearInterval(timer);
-    }
-  }, [inView, displayedRows, language]); */
-
-  /* useEffect(() => {
-    setDisplayedRows([]);
-  }, [language]); */
   
   return (
     <ThemeProvider theme={currentTheme}>
         <Grid container sx={{ backgroundColor: theme => theme.palette.background.main }}>
           <Header setLanguage={setLanguage} theme={currentTheme} translations={translations} language={language} themeMode={themeMode} toggleThemeMode={toggleThemeMode} />
-          <Grid container height="100vh" alignItems="center" justifyContent="center" padding="30px" spacing="30px">
+          <Grid container height="calc(100vh - 120px)" marginTop="120px" alignItems="center" justifyContent="center" padding="30px" spacing="30px">
 
             {/* Void space for the logo */}
             <Grid container item xs={12} md={6} alignItems="center" justifyContent="center"></Grid>
 
             {/* Flipping over card */}
-            <Grid container item xs={12} md={6} alignItems="center" justifyContent="center" sx={{ color: theme => theme.palette.primary.main }}>
+            <Grid container item xs={12} md={6} alignItems="center" justifyContent="center" sx={{ color: theme => theme.palette.primary.main, paddingRight: "10%" }}>
               <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-                <Card onMouseOver={() => setIsFlipped(true)} item sx={{ width:"300px", height:"300px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"start", textAlign:"center", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+                <Card onMouseOver={() => setIsFlipped(true)} item sx={{ width:"300px", height:"300px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"start", textAlign:"center", borderRadius:"20px", padding:"30px 20px", boxShadow:`10px 10px ${currentTheme.palette.background.cardShadow}`, backgroundColor: currentTheme.palette.background.cardBackground }}>
                     <Box ref={titleBoxRef} sx={{ height:"100px", width:"100%", position: 'relative', left: 20 }} >
                     {transitions((style, item) => (
                       <animated.div style={{ ...style, position: 'absolute' }}>
@@ -230,7 +186,7 @@ function App() {
                     </Box>
                 </Card>
 
-                <Card onMouseOut={() => setIsFlipped(false)} item sx={{ width:"300px", height:"300px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+                <Card onMouseOut={() => setIsFlipped(false)} item sx={{ width:"300px", height:"300px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", borderRadius:"20px", padding:"30px 20px", boxShadow:`10px 10px ${currentTheme.palette.background.cardShadow}`, backgroundColor: currentTheme.palette.background.cardBackground }}>
                   <Typography sx={{ color: theme => theme.palette.primary.main, maxWidth: "230px", marginBottom:0, fontWeight:600 }}>{translations.FlipCardBack1}</Typography>
                   <Typography sx={{ color: theme => theme.palette.primary.main, maxWidth: "230px", marginBottom:0, marginTop:3 }}>{translations.FlipCardBack2}</Typography>
                 </Card>
@@ -239,20 +195,9 @@ function App() {
           </Grid>
 
           <Grid container alignItems="center" justifyContent="center" padding="70px 20px 130px" spacing="30px">
-            <DataGrid //ref={ref}
-              rows={rows} // {displayedRows}
+            <DataGrid 
+              rows={rows} 
               columns={columns}
-              /* {columns.map((column) => ({
-                ...column,
-                renderCell: (params) => (
-                  <Box style={{
-                    opacity: visibleColumns[params.row.id]?.includes(column.field) ? 1 : 0,
-                    transition: 'opacity 200ms'
-                  }}>
-                    {params.value}
-                  </Box>
-                ),
-              }))} */
               hideFooter
               checkboxSelection
               sx={{ maxWidth:1000, height:526 }}
@@ -261,19 +206,19 @@ function App() {
 
           <Grid container alignItems="stretch" justifyContent="center" padding="30px" spacing="30px" marginBottom="700px"  sx={{ color: theme => theme.palette.primary.main }}>
             <Grid item xs={4} maxWidth="350px!important" sx={{ display:"flex" }}>
-              <Card item sx={{ flex:1, maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+              <Card item sx={{ flex:1, maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:`10px 10px ${currentTheme.palette.background.cardShadow}`, backgroundColor: currentTheme.palette.background.cardBackground }}>
                 <Typography component="h1" sx={{ marginBottom:1, fontWeight:600, fontSize:22 }}>{translations.Measure}</Typography>
                 <Typography>{translations.MeasureParagraph}</Typography>
               </Card>
             </Grid>
             <Grid item xs={4} maxWidth="350px!important" sx={{ display:"flex" }}>
-              <Card item sx={{ flex:1, maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+              <Card item sx={{ flex:1, maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:`10px 10px ${currentTheme.palette.background.cardShadow}`, backgroundColor: currentTheme.palette.background.cardBackground }}>
                 <Typography component="h1" sx={{ marginBottom:1, fontWeight:600, fontSize:22 }}>{translations.Train}</Typography>
                 <Typography>{translations.TrainParagraph}</Typography>
-              </Card>
+              </Card> 
             </Grid>
             <Grid item xs={4} maxWidth="350px!important" sx={{ display:"flex" }}>
-              <Card item sx={{ flex:1, maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:"10px 10px black", backgroundColor: theme => theme.palette.background.cardBackground }}>
+              <Card item sx={{ flex:1, maxWidth:"300px", borderRadius:"20px", padding:"30px 20px", boxShadow:`10px 10px ${currentTheme.palette.background.cardShadow}`, backgroundColor: currentTheme.palette.background.cardBackground }}>
                 <Typography component="h1" sx={{ marginBottom:1, fontWeight:600, fontSize:22 }}>{translations.Improve}</Typography>
                 <Typography>{translations.ImproveParagraph}</Typography>
               </Card>

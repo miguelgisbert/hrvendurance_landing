@@ -21,14 +21,14 @@ function Header ({setLanguage, theme, translations, language, themeMode, toggleT
     const group1Ref = useRef()
     const group2Ref = useRef()
     useEffect(() => {
-        const handleScroll = () => {
+        const handleScroll = () => {  
           const scrollY = window.scrollY
           const maxScroll = 500
-          const initialTop = window.innerHeight * 0.5
+          const initialTop = (window.innerHeight * 0.5 + 100)
           const initialLeft1 = window.innerWidth * 0.2
           const initialLeft2 = window.innerWidth * 0.2
-          const finalTop1 = 50
-          const finalTop2 = 41
+          const finalTop1 = 30
+          const finalTop2 = 25
           const finalLeft1 = 50
           const finalLeft2 = 190
           const initialSize = 235
@@ -56,12 +56,12 @@ function Header ({setLanguage, theme, translations, language, themeMode, toggleT
       }, [])
 
     return (
-        <Grid container component="header" zIndex="1000" height="150px" padding="30px 50px" position="fixed" sx={{ background: theme => theme.palette.background.header }}>
+        <Grid container component="header" zIndex="1000" height="120px" padding="20px 50px" position="fixed" sx={{ background: theme => theme.palette.background.header }}>
             <Grid container item xs={12} md={4} alignItems="center" justifyContent="start">
-                <Box component="img" src={logoPart1} ref={group1Ref} sx={{ width:"235px", position:"fixed", zIndex:"10", top:"50%", left:"20%", transform: "translate(0, calc(-100% - 14px))" }} />
-                <Box component="img" src={logoPart2} ref={group2Ref} sx={{ width:"235px", position:"fixed", zIndex:"10", top:"50%", left:"20%" }} />
+                <Box component="img" src={logoPart2} ref={group2Ref} sx={{ width:"235px", position:"fixed", zIndex:"10", top:"calc(50% + 100px)", left:"20%" }} />
+                <Box component="img" src={logoPart1} ref={group1Ref} sx={{ width:"235px", position:"fixed", zIndex:"10", top:"calc(50% + 100px)", left:"20%", transform: "translate(0, calc(-100% - 14px))" }} />
                 {theme.palette.mode !== "dark" && (
-                  <Card sx={{ opacity: mainLogoBGopacity, width:"350px", height:"350px", position:"fixed", top: "50%", left: "20%", zIndex: 1, transform: "translate(-18%, -58%)", backgroundColor: theme => theme.palette.secondary.main}}></Card>
+                  <Card sx={{ opacity: mainLogoBGopacity, width:"350px", height:"350px", position:"fixed", top: "calc(50% + 100px)", left: "20%", zIndex: 1, transform: "translate(-18%, -58%)", backgroundColor: theme => theme.palette.secondary.main}}></Card>
                 )}
             </Grid>
             <Grid container item xs={12} md={4} alignItems="end" justifyContent="center">
